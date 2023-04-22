@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme */
+    --todo-color: 237deg, 24%, 19%;
+    --light-grey: 0deg, 0%, 98%;
+    --vlight-grey-blue: 236deg, 33%, 92%;
+    --light-grey-blue: 233deg, 11%, 84%;
+    --dark-grey-blue: 236deg, 9%, 61%;
+    --vdark-grey-blue: 235deg, 19%, 35%;
+
+    /* Dark Theme */
+    --vdark-blue: 235deg, 21%, 11%;
+    --vdark-desaturated-blue: 235deg, 24%, 19%;
+    --light-gray-blue: 234deg, 39%, 85%;
+    --light-gray-blueH: 236deg, 33%, 92%;
+    --dark-gray-blue: 234deg, 11%, 52%;
+    --vdark-gray-blue: 233deg, 14%, 35%;
+    --vdark-gray-blue2: 237deg, 14%, 26%
+    --checkmark: 220deg, 98%, 61%
+  }
+}
