@@ -137,7 +137,7 @@ function App() {
               </li>
             </ul>
           </main>
-            <p className='text-gray-700 text-center'>
+            <p className='text-cyan-500 text-center'>
               Input a task and hit Enter to add <br/>
               Drag and Drop tasks to reorder
             </p>
