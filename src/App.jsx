@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState} from 'react'
 import { useImmer } from 'use-immer'
+import { nanoid } from 'nanoid'
 import moon from './assets/images/icon-moon.svg'
 import sun from './assets/images/icon-sun.svg'
 import Todo from './Todo'
-import { nanoid } from 'nanoid'
 
 
 function App() {
@@ -20,7 +20,8 @@ function App() {
       draft.unshift({id: nanoid(), title: value, complete: false})
     })
     inputRef.current.value = ""
-}
+  }
+
   function handleDelete(id) {
     setTodos(draft => draft.filter(todo => todo.id !== id))
   }
@@ -42,10 +43,8 @@ function App() {
   }
 
  let beingDragged
-
-  function handleDragStart(id) {
+ function handleDragStart(id) {
     beingDragged = id
-    console.log(beingDragged)
   }
 
   function handleDrop(id) {
@@ -59,12 +58,9 @@ function App() {
   }
 
   function todosLeft() {
-    let leftTodos = 0
-    todos.map(todo => {
-      if(!todo.complete) {
-        leftTodos += 1
-      }
-    })
+    let leftTodos = todos.reduce((acc, todo) => {
+      return !todo.complete ? acc + 1 : acc
+    }, 0)
     return leftTodos
   }
   useEffect(() => {
@@ -74,8 +70,9 @@ function App() {
       }
     }
     window.addEventListener('keydown', handleKeyDown)
+   
     return () => {
-      window.removeEventListener('keydown', handleKeyDown)
+    window.removeEventListener('keydown', handleKeyDown)
     }
   },[todos, []])
  
@@ -83,7 +80,7 @@ function App() {
     <div className={`${isDarkTheme ? 'bg-black' : 'bg-white'} h-screen flex flex-col items-center`}>
       <div className={`w-full h-80 ${isDarkTheme ? 'bg-black bg-desktop-dark' : 'bg-white bg-desktop-light'} bg-no-repeat bg-cover`}></div>
       <div className='max-w-3xl w-11/12 m-auto pt-16 fixed'>
-          <header className='flex justify-between items-center mb-5 mt-5'>
+          <header className='flex justify-between items-center mb-5 mt-5 px-2'>
             <h1 className="uppercase text-white text-3xl font-bold tracking-widest">todo</h1>
             <img src={isDarkTheme ? moon : sun} alt="" onClick={() => setIsDarkTheme(!isDarkTheme)} className='cursor-pointer' />
           </header>    
@@ -126,12 +123,12 @@ function App() {
                     />
                   }
                 })}
-              <li className={`${isDarkTheme ? 'bg-todo text-darkGrayBlue' : 'bg-lightGray text-todo'} flex justify-between border-b border-cyan-900 p-4`}>
+              <li className={`${isDarkTheme ? 'bg-todo text-darkGrayBlue' : 'bg-lightGray text-todo'} flex justify-between border-b border-cyan-900 p-4 font-bold`}>
                 <p className='text-sm'>{ todosLeft() } items left</p>
                 <div className='text-sm flex gap-4' >
-                  <button onClick={() => setFilter('all')}>All</button>
-                  <button onClick={() => setFilter('active')}>Active</button>
-                  <button onClick={() => setFilter('completed')}>Completed</button>
+                  <button className={`${filter === 'all' ? 'text-cyan-500' : 'text-inherit'}`} onClick={() => setFilter('all')}>All</button>
+                  <button className={`${filter === 'active' ? 'text-cyan-500' : 'text-inherit'}`} onClick={() => setFilter('active')}>Active</button>
+                  <button className={`${filter === 'completed' ? 'text-cyan-500' : 'text-inherit'}`} onClick={() => setFilter('completed')}>Completed</button>
                 </div>
                 <button className='text-sm' onClick={clearCompletedTodos}>Clear Completed</button>
               </li>

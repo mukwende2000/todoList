@@ -7,7 +7,7 @@ function Todo({ title, onDeleteTodo, complete, onChange, isDarkTheme, id, onDrag
           <input className='absolute opacity-0 peer' type="checkbox" id={id} checked={complete} onChange={onChange} />
           <label className={`cursor-pointer flex items-center ml-8 peer-checked:text-gray-500 peer-checked:line-through before:absolute before:flex before:items-center before:justify-center before:text-3xl before:text-cyan-900 before:left-4 before:w-6 before:h-6 before:outline peer-checked:before:bg-gradient before:rounded-full`} htmlFor={ id }>{ title }</label>
         </div>
-      <img className='absolute right-1 top-2 opacity-0 group-hover:opacity-100 cursor-no-drop' src={del} alt="cross icon used as a delete button" onClick={onDeleteTodo} />
+      <img className='absolute right-1 top-2 opacity-0 group-hover:opacity-100 cursor-pointer' src={del} alt="cross icon used as a delete button" onClick={onDeleteTodo} />
     </li>
   )
 }
